@@ -1,0 +1,28 @@
+{
+  "name": "reflection-function",
+  "version": "1.0.0",
+  "description": "Function reflection for JavaScript/TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andresilva-cc/reflection-function.git"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "reflection",
+    "metaprogramming",
+    "parser",
+    "function",
+    "class"
+  ],
+  "author": "André Silva (andreluiz.97@outlook.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andresilva-cc/reflection-function/issues"
+  },
+  "homepage": "https://github.com/andresilva-cc/reflection-function#readme"
+}
