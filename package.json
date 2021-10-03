@@ -26,5 +26,13 @@
   "bugs": {
     "url": "https://github.com/andresilva-cc/reflection-function/issues"
   },
-  "homepage": "https://github.com/andresilva-cc/reflection-function#readme"
+  "homepage": "https://github.com/andresilva-cc/reflection-function#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-plugin-import": "^2.24.2"
+  }
 }
