@@ -6,7 +6,7 @@ class ClassParser extends Parser {
     const signature = this.parseSignature(classObject.toString());
 
     if (!signature) {
-      throw new Error('Invalid object');
+      throw new Error('ReflectionClass: Invalid object received.');
     }
 
     return {
