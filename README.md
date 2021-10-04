@@ -49,7 +49,7 @@ ReflectionFunction {
 }
 ```
 
-And here is an example of `RefletionClass`:
+And here is an example of `ReflectionClass`:
 
 ```typescript
 import { ReflectionClass } from 'reflection-function';
@@ -73,7 +73,7 @@ class Person {
   }
 }
 
-const reflected = new ReflectionClass(person);
+const reflected = new ReflectionClass(Person);
 
 console.log(reflected);
 ```
