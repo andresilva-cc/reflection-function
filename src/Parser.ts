@@ -1,29 +1,35 @@
 import ReflectionParameter from './ReflectionParameter';
 
 class Parser {
-  public static parse(functionObject: Function): any {
-    const signature = this.parseSignature(functionObject.toString());
+  public static parse(functionObject: Function | string): any {
+    const functionAsString = functionObject.toString();
+
+    const signature = this.parseSignature(functionAsString);
 
     if (!signature) {
       throw new Error('ReflectionFunction: Invalid object received.');
     }
 
     return {
-      name: this.parseName(signature),
+      name: this.parseName(functionObject),
       parameters: this.parseParameters(signature),
     };
   }
 
-  protected static parseSignature(rawFunction: string) {
-    return rawFunction.match(/(.+)(\s{)/)?.[0].trim();
+  protected static parseSignature(functionAsString: string) {
+    return functionAsString.match(/(.*)(\s[{=>]+)/)?.[0]?.trim();
   }
 
-  protected static parseName(rawSignature: string) {
-    return rawSignature.match(/\bfunction\b\s(.+)\(/)?.[1].trim();
+  protected static parseName(functionObject: Function | string) {
+    if (typeof functionObject === 'function') {
+      return functionObject.name;
+    }
+
+    return functionObject.match(/(function\s)?(.+)\(/)?.[2]?.trim();
   }
 
-  protected static parseParameters(rawParameters: string) {
-    const match = rawParameters.match(/\((.+)\)/)?.[1].trim();
+  protected static parseParameters(signature: string) {
+    const match = signature.match(/\((.*)\)/)?.[1]?.trim();
 
     if (!match) {
       return [];

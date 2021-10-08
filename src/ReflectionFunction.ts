@@ -6,8 +6,8 @@ class ReflectionFunction {
 
   public readonly parameters: Array<ReflectionParameter>;
 
-  constructor(functionReference: Function, name?: string) {
-    const parsedFunction = Parser.parse(functionReference);
+  constructor(functionObject: Function | string, name?: string) {
+    const parsedFunction = Parser.parse(functionObject);
 
     this.name = name || parsedFunction.name;
     this.parameters = parsedFunction.parameters;
