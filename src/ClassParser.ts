@@ -3,11 +3,27 @@ import ReflectionFunction from './ReflectionFunction';
 
 class ClassParser extends Parser {
   public static override parse(classObject: Function): any {
-    const signature = this.parseSignature(classObject.toString());
-
-    if (!signature) {
-      throw new Error('ReflectionClass: Invalid object received.');
+    if (this.isFunctionSyntax(classObject)) {
+      return this.parseAsFunctionSyntax(classObject);
     }
+
+    if (this.isClassSyntax(classObject)) {
+      throw new Error('Not implemented.');
+    }
+
+    throw new Error('Unknown syntax.');
+  }
+
+  private static isFunctionSyntax(classObject: Function): any {
+    return classObject.toString().startsWith('function');
+  }
+
+  private static isClassSyntax(classObject: Function): any {
+    return classObject.toString().startsWith('class');
+  }
+
+  private static parseAsFunctionSyntax(classObject: Function): any {
+    const signature = this.parseSignature(classObject.toString()) as string;
 
     return {
       name: this.parseName(signature),
