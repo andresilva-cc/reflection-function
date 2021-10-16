@@ -8,7 +8,7 @@ class ReflectionClass {
 
   public readonly methods: Array<ReflectionFunction>;
 
-  constructor(classReference: Function) {
+  constructor(classReference: Function | string) {
     const parsedClass = ClassParser.parse(classReference);
 
     this.name = parsedClass.name;

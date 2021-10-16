@@ -9,36 +9,57 @@ describe('ReflectionFunction', () => {
     return 3.14;
   }
 
+  const multiply = `
+    multiply(a, b) {
+      return a * b;
+    }
+  `;
+
   const invalidObject = {} as Function;
 
   let reflectedAdd: ReflectionFunction;
   let reflectedGetPI: ReflectionFunction;
+  let reflectedMultiply: ReflectionFunction;
 
   beforeAll(() => {
     reflectedAdd = new ReflectionFunction(add);
     reflectedGetPI = new ReflectionFunction(getPI);
+    reflectedMultiply = new ReflectionFunction(multiply);
   });
 
-  it('should contain the correct function name', () => {
+  test('normal function: should contain the correct function name', () => {
     expect(reflectedAdd.name).toBe('add');
   });
 
-  it('should contain 2 parameters', () => {
+  test('normal function: should contain 2 parameters', () => {
     expect(reflectedAdd.numberOfParameters).toBe(2);
   });
 
-  it('should contain the correct parameters name', () => {
+  test('normal function: should contain the correct parameters name', () => {
     expect(reflectedAdd.parameters[0].name).toBe('a');
     expect(reflectedAdd.parameters[1].name).toBe('b');
   });
 
-  test('parameters array should be empty', () => {
+  test('normal function: parameters array should be empty', () => {
     expect(reflectedGetPI.parameters.length).toBe(0);
   });
 
-  test('name should be undefined when an arrow function is passed', () => {
+  test('without function keyword: should contain the correct function name', () => {
+    expect(reflectedMultiply.name).toBe('multiply');
+  });
+
+  test('without function keyword: should contain 2 parameters', () => {
+    expect(reflectedMultiply.numberOfParameters).toBe(2);
+  });
+
+  test('without function keyword: should contain the correct parameters name', () => {
+    expect(reflectedMultiply.parameters[0].name).toBe('a');
+    expect(reflectedMultiply.parameters[1].name).toBe('b');
+  });
+
+  test('arrow function: name should be empty', () => {
     const reflectedArrowFunction = new ReflectionFunction((a: string, b: string) => a + b);
-    expect(reflectedArrowFunction.name).toBeUndefined();
+    expect(reflectedArrowFunction.name).toBeFalsy();
   });
 
   it('should throw an error when an invalid object is passed', () => {
