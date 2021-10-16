@@ -15,11 +15,11 @@ class ClassParser extends Parser {
   }
 
   private static isFunctionSyntax(classObject: Function | string): any {
-    return classObject.toString().startsWith('function');
+    return classObject.toString().trim().startsWith('function');
   }
 
   private static isClassSyntax(classObject: Function | string): any {
-    return classObject.toString().startsWith('class');
+    return classObject.toString().trim().startsWith('class');
   }
 
   private static parseAsFunctionSyntax(classObject: Function): any {
