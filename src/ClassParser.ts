@@ -2,9 +2,9 @@ import Parser from './Parser';
 import ReflectionFunction from './ReflectionFunction';
 
 class ClassParser extends Parser {
-  public static override parse(classObject: Function): any {
+  public static override parse(classObject: Function | string): any {
     if (this.isFunctionSyntax(classObject)) {
-      return this.parseAsFunctionSyntax(classObject);
+      return this.parseAsFunctionSyntax(classObject as Function);
     }
 
     if (this.isClassSyntax(classObject)) {
@@ -14,11 +14,11 @@ class ClassParser extends Parser {
     throw new Error('Unknown syntax.');
   }
 
-  private static isFunctionSyntax(classObject: Function): any {
+  private static isFunctionSyntax(classObject: Function | string): any {
     return classObject.toString().startsWith('function');
   }
 
-  private static isClassSyntax(classObject: Function): any {
+  private static isClassSyntax(classObject: Function | string): any {
     return classObject.toString().startsWith('class');
   }
 
@@ -32,7 +32,7 @@ class ClassParser extends Parser {
     };
   }
 
-  private static parseAsClassSyntax(classObject: Function): any {
+  private static parseAsClassSyntax(classObject: Function | string): any {
     const classAsString = classObject.toString();
     const signature = this.parseSignature(classAsString) as string;
 
