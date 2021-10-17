@@ -1,6 +1,6 @@
 {
   "name": "reflection-function",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Function reflection for JavaScript/TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
