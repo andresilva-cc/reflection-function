@@ -44,7 +44,7 @@ class ClassParser extends Parser {
   }
 
   private static parseClassName(rawSignature: string) {
-    return rawSignature.match(/\bclass\b\s(.+)\{/)?.[1].trim();
+    return rawSignature.match(/\bclass\b\s(.+)\{/)?.[1].split(' ')[0].trim();
   }
 
   private static parseConstructor(classAsString: string) {
