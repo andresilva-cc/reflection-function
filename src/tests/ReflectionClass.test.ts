@@ -1,43 +1,19 @@
-/* eslint-disable func-names */
 import ReflectionClass from '../ReflectionClass';
+import PersonFunctionSyntax from './Mock/PersonFunctionSyntax';
+import PersonClassSyntax from './Mock/PersonClassSyntax';
+import Dog from './Mock/Dog';
 
 describe('ReflectionClass', () => {
-  function Person(this: any, name: string, age: number) {
-    this.name = name;
-    this.age = age;
-  }
-
-  Person.prototype.setAge = function (age: number) {
-    this.age = age;
-  };
-
-  Person.prototype.getIntroduction = function () {
-    return `Hi, I'm ${this.name} and I'm ${this.age} years old`;
-  };
-
-  const PersonClassSyntax = `
-  class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-    setAge(age) {
-        this.age = age;
-    }
-    getIntroduction() {
-        return \`Hi, I'm \${this.name} and I'm \${this.age} years old\`;
-    }
-  }
-  `;
-
   const invalidObject = {} as Function;
 
   let reflectedPersonFunctionSyntax: ReflectionClass;
   let reflectedPersonClassSyntax: ReflectionClass;
+  let reflectedDog: ReflectionClass;
 
   beforeAll(() => {
-    reflectedPersonFunctionSyntax = new ReflectionClass(Person);
+    reflectedPersonFunctionSyntax = new ReflectionClass(PersonFunctionSyntax);
     reflectedPersonClassSyntax = new ReflectionClass(PersonClassSyntax);
+    reflectedDog = new ReflectionClass(Dog);
   });
 
   it('function syntax: should contain the correct class name', () => {
@@ -86,6 +62,10 @@ describe('ReflectionClass', () => {
   it('class syntax: should contain getIntroduction method without any parameters', () => {
     expect(reflectedPersonClassSyntax.methods[1].name).toBe('getIntroduction');
     expect(reflectedPersonClassSyntax.methods[1].numberOfParameters).toBe(0);
+  });
+
+  it('should remove "extends..." from class name', () => {
+    expect(reflectedDog.name).toBe('Dog');
   });
 
   it('should throw an error when an invalid object is passed', () => {
